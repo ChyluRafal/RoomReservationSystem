@@ -1,3 +1,7 @@
+package pl.chylu.hotelapp;
+
+import pl.chylu.hotelapp.ui.text.TextUI;
+
 public class App {
     private static TextUI textUI = new TextUI();
     public static void main(String[] args) {

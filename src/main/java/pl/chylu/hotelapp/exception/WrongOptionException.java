@@ -1,3 +1,5 @@
+package pl.chylu.hotelapp.exception;
+
 public class WrongOptionException extends ReservationCustomException {
     private int code = 101;
     public WrongOptionException(String message) {

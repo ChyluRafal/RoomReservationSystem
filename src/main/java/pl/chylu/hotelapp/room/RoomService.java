@@ -1,3 +1,7 @@
+package pl.chylu.hotelapp.room;
+
+import pl.chylu.hotelapp.exception.WrongOptionException;
+
 public class RoomService {
     private RoomRepository repository = new RoomRepository();
     public Room createNewRoom(int number, int[] bedTypesOptions) {

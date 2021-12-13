@@ -1,3 +1,5 @@
+package pl.chylu.hotelapp.room;
+
 public class Room {
     private int number;
     private BedType[] beds;

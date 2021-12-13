@@ -1,3 +1,5 @@
+package pl.chylu.hotelapp.guest;
+
 public class Guest {
     private String firstName = null;
     private String lastName = null;

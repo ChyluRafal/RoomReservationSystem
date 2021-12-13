@@ -1,3 +1,12 @@
+package pl.chylu.hotelapp.ui.text;
+
+import pl.chylu.hotelapp.exception.OnlyNumberException;
+import pl.chylu.hotelapp.exception.WrongOptionException;
+import pl.chylu.hotelapp.guest.Guest;
+import pl.chylu.hotelapp.guest.GuestService;
+import pl.chylu.hotelapp.room.Room;
+import pl.chylu.hotelapp.room.RoomService;
+
 import java.util.InputMismatchException;
 import java.util.Scanner;
 public class TextUI {

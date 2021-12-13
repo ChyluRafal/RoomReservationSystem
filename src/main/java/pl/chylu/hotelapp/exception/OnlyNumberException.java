@@ -1,3 +1,5 @@
+package pl.chylu.hotelapp.exception;
+
 public class OnlyNumberException extends ReservationCustomException {
     private int code = 102;
     public OnlyNumberException(String message) {
