@@ -2,14 +2,16 @@ public class Guest {
     private String firstName = null;
     private String lastName = null;
     private int age = 0;
+    private Gender sexType;
 
-    public Guest(String firstName, String lastName, int age) {
+    public Guest(String firstName, String lastName, int age, Gender sexType) {
         this.firstName = firstName;
         this.lastName = lastName;
         this.age = age;
+        this.sexType = sexType;
     }
-    public String getInfoGuest() {
-        return String.format("Dodano nowego gościa: %s %s (wiek: %d) ", getFirstName(), getLastName(), getAge());
+    public String getInfo() {
+        return String.format("Dodano nowego gościa: %s %s (wiek: %d) (płeć: %s)", this.firstName, this.lastName, this.age, this.sexType);
     }
 
     public String getFirstName() {
