@@ -1,4 +1,4 @@
-package pl.chylu.hotelapp.guest;
+package pl.chylu.hotelapp.domain.guest;
 
 public class Guest {
     private String firstName = null;

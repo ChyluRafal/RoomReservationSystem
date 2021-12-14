@@ -1,4 +1,4 @@
-package pl.chylu.hotelapp.room;
+package pl.chylu.hotelapp.domain.room;
 
 public class Room {
     private int number;

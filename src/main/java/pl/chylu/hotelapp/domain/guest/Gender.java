@@ -1,4 +1,4 @@
-package pl.chylu.hotelapp.guest;
+package pl.chylu.hotelapp.domain.guest;
 
 public enum Gender {
     MALE,

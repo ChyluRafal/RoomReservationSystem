@@ -2,17 +2,17 @@ package pl.chylu.hotelapp.ui.text;
 
 import pl.chylu.hotelapp.exception.OnlyNumberException;
 import pl.chylu.hotelapp.exception.WrongOptionException;
-import pl.chylu.hotelapp.guest.Guest;
-import pl.chylu.hotelapp.guest.GuestService;
-import pl.chylu.hotelapp.room.Room;
-import pl.chylu.hotelapp.room.RoomService;
+import pl.chylu.hotelapp.domain.guest.Guest;
+import pl.chylu.hotelapp.domain.guest.GuestService;
+import pl.chylu.hotelapp.domain.room.Room;
+import pl.chylu.hotelapp.domain.room.RoomService;
 
 import java.util.InputMismatchException;
 import java.util.Scanner;
 public class TextUI {
-    GuestService guestService = new GuestService();
-    RoomService roomService = new RoomService();
-    public void readNewGuestData(Scanner input) {
+    private GuestService guestService = new GuestService();
+    private RoomService roomService = new RoomService();
+    private void readNewGuestData(Scanner input) {
         System.out.println("Tworzymy nowego gościa.");
         try {
             System.out.println("Podaj imię: ");
@@ -21,7 +21,7 @@ public class TextUI {
             String lastName = input.next();
             System.out.println("Podaj wiek: ");
             int age = input.nextInt();
-            System.out.println("Podaj płeć (1. Mężczyzna, 2. Kobieta)");
+            System.out.println("Podaj płeć (1. Mężczyzna, 2. Kobieta");
             int genderOption = input.nextInt();
             if (genderOption != 1 && genderOption != 2) {
                 throw new WrongOptionException("Wrong option in gender selection");
@@ -32,7 +32,7 @@ public class TextUI {
             throw new OnlyNumberException("Use only numbers when choosing gender");
         }
     }
-    public void readNewRoomData(Scanner input) {
+    private void readNewRoomData(Scanner input) {
         System.out.println("Tworzymy nowy pokój.");
         try {
             System.out.println("Numer: ");
@@ -94,7 +94,7 @@ public class TextUI {
             throw new WrongOptionException("Wrong option in main menu");
         }
     }
-    public static int getActionFromUser(Scanner in) {
+    private static int getActionFromUser(Scanner in) {
         System.out.println("1. Dodaj nowego gościa.");
         System.out.println("2. Dodaj nowy pokój.");
         System.out.println("3. Wyszukaj gościa.");

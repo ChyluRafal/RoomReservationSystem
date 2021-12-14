@@ -1,4 +1,4 @@
-package pl.chylu.hotelapp.room;
+package pl.chylu.hotelapp.domain.room;
 
 import pl.chylu.hotelapp.exception.WrongOptionException;
 
