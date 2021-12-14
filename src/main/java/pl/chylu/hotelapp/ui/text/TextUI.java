@@ -7,11 +7,12 @@ import pl.chylu.hotelapp.domain.guest.GuestService;
 import pl.chylu.hotelapp.domain.room.Room;
 import pl.chylu.hotelapp.domain.room.RoomService;
 
+
 import java.util.InputMismatchException;
 import java.util.Scanner;
 public class TextUI {
-    private GuestService guestService = new GuestService();
-    private RoomService roomService = new RoomService();
+    private final GuestService guestService = new GuestService();
+    private final RoomService roomService = new RoomService();
     private void readNewGuestData(Scanner input) {
         System.out.println("Tworzymy nowego gościa.");
         try {
@@ -26,7 +27,11 @@ public class TextUI {
             if (genderOption != 1 && genderOption != 2) {
                 throw new WrongOptionException("Wrong option in gender selection");
             }
-            Guest newGuest = guestService.createNewGuest(firstName, lastName, age, genderOption);
+            boolean isMale = false;
+            if(genderOption==1) {
+                isMale = true;
+            }
+            Guest newGuest = guestService.createNewGuest(firstName, lastName, age, isMale);
             System.out.println(newGuest.getInfo());
         } catch (InputMismatchException e) {
             throw new OnlyNumberException("Use only numbers when choosing gender");
@@ -99,7 +104,7 @@ public class TextUI {
         System.out.println("2. Dodaj nowy pokój.");
         System.out.println("3. Wyszukaj gościa.");
         System.out.println("Wybierz opcję: ");
-        int option = 0;
+        int option;
         try {
             option = in.nextInt();
         } catch (InputMismatchException e) {

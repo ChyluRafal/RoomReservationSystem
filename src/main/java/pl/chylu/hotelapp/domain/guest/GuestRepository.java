@@ -1,8 +1,7 @@
 package pl.chylu.hotelapp.domain.guest;
 
 public class GuestRepository {
-    public Guest createNewGuest(String firstName, String lastName, int age, Gender gender) {
-        Guest newGuest = new Guest(firstName, lastName, age, gender);
-        return newGuest;
+    Guest createNewGuest(String firstName, String lastName, int age, Gender gender) {
+        return new Guest(firstName, lastName, age, gender);
     }
 }
