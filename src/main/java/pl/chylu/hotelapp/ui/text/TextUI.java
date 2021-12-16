@@ -1,15 +1,15 @@
 package pl.chylu.hotelapp.ui.text;
 
-import pl.chylu.hotelapp.exception.OnlyNumberException;
-import pl.chylu.hotelapp.exception.WrongOptionException;
 import pl.chylu.hotelapp.domain.guest.Guest;
 import pl.chylu.hotelapp.domain.guest.GuestService;
 import pl.chylu.hotelapp.domain.room.Room;
 import pl.chylu.hotelapp.domain.room.RoomService;
-
-
+import pl.chylu.hotelapp.exception.OnlyNumberException;
+import pl.chylu.hotelapp.exception.WrongOptionException;
 import java.util.InputMismatchException;
+import java.util.List;
 import java.util.Scanner;
+
 public class TextUI {
     private final GuestService guestService = new GuestService();
     private final RoomService roomService = new RoomService();
@@ -22,7 +22,7 @@ public class TextUI {
             String lastName = input.next();
             System.out.println("Podaj wiek: ");
             int age = input.nextInt();
-            System.out.println("Podaj płeć (1. Mężczyzna, 2. Kobieta");
+            System.out.println("Podaj płeć (1. Mężczyzna, 2. Kobieta)");
             int genderOption = input.nextInt();
             if (genderOption != 1 && genderOption != 2) {
                 throw new WrongOptionException("Wrong option in gender selection");
@@ -32,7 +32,7 @@ public class TextUI {
                 isMale = true;
             }
             Guest newGuest = guestService.createNewGuest(firstName, lastName, age, isMale);
-            System.out.println(newGuest.getInfo());
+            System.out.println("Dodano nowego gościa: " + newGuest.getInfo());
         } catch (InputMismatchException e) {
             throw new OnlyNumberException("Use only numbers when choosing gender");
         }
@@ -83,26 +83,44 @@ public class TextUI {
             System.out.println("Nieznany kod błędu");
             System.out.println("Komunikat błędu: " + e.getMessage());
             e.printStackTrace();
-        } finally {
-            System.out.println("Wychodzę z aplikacji");
         }
     }
     private void performAction(Scanner input) {
-        int option = getActionFromUser(input);
-        if (option == 1) {
-            readNewGuestData(input);
-        } else if (option == 2) {
-            readNewRoomData(input);
-        } else if (option == 3) {
-            System.out.println("Wybrano opcję 3.");
-        } else {
-            throw new WrongOptionException("Wrong option in main menu");
+        int option = -1;
+        while(option!=0) {
+            option = getActionFromUser(input);
+            switch (option) {
+                case 1 -> readNewGuestData(input);
+                case 2 -> readNewRoomData(input);
+                case 3 -> showAllGuests();
+                case 4 -> showAllRoom();
+                //case 5 -> findGuest();
+                //case 6 -> findRoom();
+                case 0 -> System.out.println("Wychodzę z aplikacji");
+                case default -> throw new WrongOptionException("Wrong option in main menu");
+            }
+        }
+    }
+
+    private void showAllRoom() {
+        List<Room> rooms = this.roomService.getAllRooms();
+        for (Room room : rooms) {
+            System.out.println(room.getInfo());
+        }
+    }
+
+    private void showAllGuests() {
+        List<Guest> guests = this.guestService.getAllGuests();
+        for(Guest guest : guests) {
+            System.out.println(guest.getInfo());
         }
     }
     private static int getActionFromUser(Scanner in) {
-        System.out.println("1. Dodaj nowego gościa.");
-        System.out.println("2. Dodaj nowy pokój.");
-        System.out.println("3. Wyszukaj gościa.");
+        System.out.println("1 - Dodaj nowego gościa.");
+        System.out.println("2 - Dodaj nowy pokój.");
+        System.out.println("3 - Wypisz wszystkich gości.");
+        System.out.println("4 - Wypisz wszystkie pokoje.");
+        System.out.println("0 - Wyjście z aplikacji");
         System.out.println("Wybierz opcję: ");
         int option;
         try {

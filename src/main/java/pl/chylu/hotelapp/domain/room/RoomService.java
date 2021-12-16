@@ -2,12 +2,14 @@ package pl.chylu.hotelapp.domain.room;
 
 import pl.chylu.hotelapp.exception.WrongOptionException;
 
+import java.util.List;
+
 public class RoomService {
     private RoomRepository repository = new RoomRepository();
     public Room createNewRoom(int number, int[] bedTypesOptions) {
         BedType[] bedTypes = new BedType[bedTypesOptions.length];
         for(int i=0;i<bedTypesOptions.length;i=i+1) {
-            BedType bedType = BedType.SINGLE;
+            BedType bedType;
             if (bedTypesOptions[i] == 1) {
                 bedType = BedType.SINGLE;
             } else if (bedTypesOptions[i] == 2) {
@@ -20,5 +22,9 @@ public class RoomService {
             bedTypes[i] = bedType;
         }
         return repository.createNewRoom(number, bedTypes);
+    }
+
+    public List<Room> getAllRooms() {
+        return this.repository.getAll();
     }
 }

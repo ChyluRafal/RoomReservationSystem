@@ -5,6 +5,7 @@ public class Guest {
     private final String lastName;
     private final int age;
     private final Gender gender;
+
     Guest(String firstName, String lastName, int age, Gender gender) {
         this.firstName = firstName;
         this.lastName = lastName;
@@ -12,6 +13,6 @@ public class Guest {
         this.gender = gender;
     }
     public String getInfo() {
-        return String.format("Dodano nowego gościa: %s %s (%d) (%s)", this.firstName, this.lastName, this.age, this.gender);
+        return String.format("%s %s (%d) (%s)", this.firstName, this.lastName, this.age, this.gender);
     }
 }
