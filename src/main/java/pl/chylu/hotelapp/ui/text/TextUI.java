@@ -96,7 +96,7 @@ public class TextUI {
                 case 4 -> showAllRoom();
                 //case 5 -> findGuest();
                 //case 6 -> findRoom();
-                case 0 -> System.out.println("Wychodzę z aplikacji");
+                case 0 -> {System.out.println("Wychodzę z aplikacji. Zapisuję dane."); this.guestService.saveAll();}
                 case default -> throw new WrongOptionException("Wrong option in main menu");
             }
         }
