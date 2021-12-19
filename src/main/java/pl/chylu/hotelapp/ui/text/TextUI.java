@@ -14,6 +14,7 @@ import java.util.Scanner;
 public class TextUI {
     private final GuestService guestService = new GuestService();
     private final RoomService roomService = new RoomService();
+
     private void readNewGuestData(Scanner input) {
         System.out.println("Tworzymy nowego gościa.");
         try {
@@ -24,12 +25,14 @@ public class TextUI {
             System.out.println("Podaj wiek: ");
             int age = input.nextInt();
             System.out.println("Podaj płeć (1. Mężczyzna, 2. Kobieta)");
+
             int genderOption = input.nextInt();
+
             if (genderOption != 1 && genderOption != 2) {
                 throw new WrongOptionException("Wrong option in gender selection");
             }
             boolean isMale = false;
-            if(genderOption==1) {
+            if (genderOption == 1) {
                 isMale = true;
             }
             Guest newGuest = guestService.createNewGuest(firstName, lastName, age, isMale);
@@ -38,6 +41,7 @@ public class TextUI {
             throw new OnlyNumberException("Use only numbers when choosing gender");
         }
     }
+
     private void readNewRoomData(Scanner input) {
         System.out.println("Tworzymy nowy pokój.");
         try {
@@ -45,11 +49,12 @@ public class TextUI {
             int number = input.nextInt();
             int[] bedTypes = chooseBedType(input);
             Room newRoom = roomService.createNewRoom(number, bedTypes);
-            System.out.println(newRoom.getInfo());
+            System.out.println("Dodano nowy pokój: " + newRoom.getInfo());
         } catch (InputMismatchException e) {
             throw new OnlyNumberException("Use numbers when creating new room");
         }
     }
+
     private int[] chooseBedType(Scanner input) {
         System.out.println("Ile łóżek w pokoju?: ");
         int bedNumber = input.nextInt();
@@ -64,16 +69,19 @@ public class TextUI {
         }
         return bedTypes;
     }
+
     public void showSystemInfo(String hotelName, int systemVersion, boolean isDeveloperVersion) {
         System.out.print("Witam w systemie rezerwacji dla hotelu " + hotelName);
         System.out.println("Aktualna wersja systemu: " + systemVersion);
         System.out.println("Wersja developerska: " + isDeveloperVersion);
         System.out.println("\n=========================\n");
     }
+
     public void showMainMenu() {
         Scanner input = new Scanner(System.in);
+        System.out.println("Trwa ładowanie danych...");
         this.guestService.readAll();
-      //  this.roomService.readAll();
+        this.roomService.readAll();
 
         try {
             performAction(input);
@@ -89,9 +97,10 @@ public class TextUI {
             e.printStackTrace();
         }
     }
+
     private void performAction(Scanner input) {
         int option = -1;
-        while(option!=0) {
+        while (option != 0) {
             option = getActionFromUser(input);
             switch (option) {
                 case 1 -> readNewGuestData(input);
@@ -101,7 +110,10 @@ public class TextUI {
                 //case 5 -> findGuest();
                 //case 6 -> findRoom();
                 case 7 -> saveAllData();
-                case 0 -> {System.out.println("Wychodzę z aplikacji. Zapisuję dane."); this.guestService.saveAll(); this.roomService.saveAll();}
+                case 0 -> {
+                    System.out.println("Wychodzę z aplikacji. Zapisuję dane.");
+                    saveAllData();
+                }
                 case default -> throw new WrongOptionException("Wrong option in main menu");
             }
         }
@@ -116,12 +128,13 @@ public class TextUI {
 
     private void showAllGuests() {
         List<Guest> guests = this.guestService.getAllGuests();
-        for(Guest guest : guests) {
+        for (Guest guest : guests) {
             System.out.println(guest.getInfo());
         }
     }
+
     private static int getActionFromUser(Scanner in) {
-        System.out.println("1 - Dodaj nowego gościa.");
+        System.out.println("\n1 - Dodaj nowego gościa.");
         System.out.println("2 - Dodaj nowy pokój.");
         System.out.println("3 - Wypisz wszystkich gości.");
         System.out.println("4 - Wypisz wszystkie pokoje.");
@@ -138,9 +151,9 @@ public class TextUI {
         }
         return option;
     }
+
     private void saveAllData() {
         this.guestService.saveAll();
         this.roomService.saveAll();
-
     }
 }

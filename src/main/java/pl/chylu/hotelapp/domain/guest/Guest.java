@@ -24,4 +24,5 @@ public class Guest {
                 this.gender,
                 System.getProperty("line.separator"));
     }
+
 }

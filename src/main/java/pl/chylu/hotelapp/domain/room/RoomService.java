@@ -5,7 +5,7 @@ import pl.chylu.hotelapp.exception.WrongOptionException;
 import java.util.List;
 
 public class RoomService {
-    private RoomRepository repository = new RoomRepository();
+    private final RoomRepository repository = new RoomRepository();
     public Room createNewRoom(int number, int[] bedTypesOptions) {
         BedType[] bedTypes = new BedType[bedTypesOptions.length];
         for(int i=0;i<bedTypesOptions.length;i=i+1) {
@@ -30,5 +30,9 @@ public class RoomService {
 
     public void saveAll() {
         this.repository.saveAll();
+    }
+
+    public void readAll() {
+        this.repository.readAll();
     }
 }

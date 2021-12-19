@@ -6,7 +6,7 @@ public class App {
     private static TextUI textUI = new TextUI();
 
     public static void main(String[] args) {
-        String hotelName = "Overlook";
+        String hotelName = "TimeToSleep";
         int systemVersion = 1;
         boolean isDeveloperVersion = true;
 

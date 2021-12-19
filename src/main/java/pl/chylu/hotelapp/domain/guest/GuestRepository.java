@@ -1,5 +1,7 @@
 package pl.chylu.hotelapp.domain.guest;
 
+import pl.chylu.hotelapp.domain.repository.Repository;
+
 import java.io.IOException;
 import java.nio.charset.StandardCharsets;
 import java.nio.file.Files;
@@ -8,7 +10,7 @@ import java.nio.file.Paths;
 import java.util.ArrayList;
 import java.util.List;
 
-public class GuestRepository {
+public class GuestRepository extends Repository {
     List<Guest> guests = new ArrayList<>();
     Guest createNewGuest(String firstName, String lastName, int age, Gender gender) {
         Guest newGuest = new Guest(firstName, lastName, age, gender);
@@ -19,7 +21,8 @@ public class GuestRepository {
         return this.guests;
     }
 
-    void saveAll() {
+    @Override
+    protected void saveAll() {
         String name = "guests.csv";
         Path file = Paths.get(
                 System.getProperty("user.home"),
@@ -40,8 +43,10 @@ public class GuestRepository {
         }
     }
 
-    void readAll() {
+    @Override
+    protected void readAll() {
         String name = "guests.csv";
+
         Path file = Paths.get(
                 System.getProperty("user.home"),
                 "reservation_system",
