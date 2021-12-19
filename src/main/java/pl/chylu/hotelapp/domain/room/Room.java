@@ -1,5 +1,7 @@
 package pl.chylu.hotelapp.domain.room;
 
+import java.util.Arrays;
+
 public class Room {
     private final int number;
     private final BedType[] beds;
@@ -13,5 +15,9 @@ public class Room {
             bedInfo.append("\t").append(bed).append("\n");
         }
         return String.format("Pokój numer %d %s", this.number, bedInfo.toString());
+    }
+
+    String toCSV() {
+        return String.format("Pokój numer %d %s", this.number, Arrays.toString(this.beds));
     }
 }

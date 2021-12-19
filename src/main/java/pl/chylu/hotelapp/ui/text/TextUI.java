@@ -6,6 +6,7 @@ import pl.chylu.hotelapp.domain.room.Room;
 import pl.chylu.hotelapp.domain.room.RoomService;
 import pl.chylu.hotelapp.exception.OnlyNumberException;
 import pl.chylu.hotelapp.exception.WrongOptionException;
+
 import java.util.InputMismatchException;
 import java.util.List;
 import java.util.Scanner;
@@ -71,6 +72,9 @@ public class TextUI {
     }
     public void showMainMenu() {
         Scanner input = new Scanner(System.in);
+        this.guestService.readAll();
+      //  this.roomService.readAll();
+
         try {
             performAction(input);
         } catch (WrongOptionException | OnlyNumberException e) {
@@ -96,7 +100,8 @@ public class TextUI {
                 case 4 -> showAllRoom();
                 //case 5 -> findGuest();
                 //case 6 -> findRoom();
-                case 0 -> {System.out.println("Wychodzę z aplikacji. Zapisuję dane."); this.guestService.saveAll();}
+                case 7 -> saveAllData();
+                case 0 -> {System.out.println("Wychodzę z aplikacji. Zapisuję dane."); this.guestService.saveAll(); this.roomService.saveAll();}
                 case default -> throw new WrongOptionException("Wrong option in main menu");
             }
         }
@@ -120,6 +125,9 @@ public class TextUI {
         System.out.println("2 - Dodaj nowy pokój.");
         System.out.println("3 - Wypisz wszystkich gości.");
         System.out.println("4 - Wypisz wszystkie pokoje.");
+        System.out.println("5 - Znajdź swojego gościa");
+        System.out.println("6 - Znajdź swój pokój");
+        System.out.println("7 - Zapisz dotychczasowe postępy.");
         System.out.println("0 - Wyjście z aplikacji");
         System.out.println("Wybierz opcję: ");
         int option;
@@ -129,5 +137,10 @@ public class TextUI {
             throw new OnlyNumberException("Use only numbers in main menu");
         }
         return option;
+    }
+    private void saveAllData() {
+        this.guestService.saveAll();
+        this.roomService.saveAll();
+
     }
 }

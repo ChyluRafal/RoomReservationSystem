@@ -39,4 +39,26 @@ public class GuestRepository {
             e.printStackTrace();
         }
     }
+
+    void readAll() {
+        String name = "guests.csv";
+        Path file = Paths.get(
+                System.getProperty("user.home"),
+                "reservation_system",
+                name);
+        try {
+            String data = Files.readString(file, StandardCharsets.UTF_8);
+            String[] guestsAsString = data.split(System.getProperty("line.separator"));
+
+            for (String guestAsStrings : guestsAsString) {
+                String[] guestData = guestAsStrings.split(",");
+                int ageData = Integer.parseInt(guestData[2]);
+                Gender genderData = Gender.valueOf(guestData[3]);
+                createNewGuest(guestData[0], guestData[1], ageData, genderData);
+            }
+        } catch (IOException e) {
+            System.out.println("Nie udało się odczytać pliku z poprzednio zapisanymi danymi.");
+            e.printStackTrace();
+        }
+    }
 }
